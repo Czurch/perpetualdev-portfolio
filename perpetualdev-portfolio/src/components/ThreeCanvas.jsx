@@ -5,8 +5,14 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js'
 
-function ThreeCanvas({className, children, hdr, model, ...props }){
+function ThreeCanvas({className, children, hdr, model, camIndex, ...props }){
     const canvasRef = useRef(null)
+    
+    const cameraLocations=[
+        new THREE.Vector3( 0 , 2.5, 2.5),
+        new THREE.Vector3( 0.75 , 3, -4),
+        new THREE.Vector3( 2.75 , 3, -5.5)
+     ]
 
     useEffect(() => {
         const scene = new THREE.Scene();
@@ -28,7 +34,7 @@ function ThreeCanvas({className, children, hdr, model, ...props }){
         // ----- Set Camera -----
         const camera = new THREE.PerspectiveCamera( 39.5978, width/ height, 0.1, 1000);
         //const controls = new OrbitControls( camera, renderer.domElement );
-        camera.position.set( 0 , 2.5, 2.5);
+        camera.position.set(cameraLocations[camIndex].x, cameraLocations[camIndex].y, cameraLocations[camIndex].z);
         //controls.update();
 
 
@@ -78,7 +84,7 @@ function ThreeCanvas({className, children, hdr, model, ...props }){
       
         animate();
         renderer.render(scene, camera);
-    }, [])
+    }, [camIndex])
 
     return(
         <div>

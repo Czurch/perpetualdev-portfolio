@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import githubLogo from './assets/github-mark-white.svg'
 import unrealLogo from './assets/unreal-logo.svg'
@@ -7,22 +7,25 @@ import ThreeCanvas from './components/ThreeCanvas'
 import { Text, ChakraProvider, Tabs, TabList, TabPanels, Tab, TabPanel, extendTheme} from '@chakra-ui/react'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [tabIndex, setTabIndex] = useState(0)
+  useEffect(() =>{
+    console.log(`Tab has changed: ${tabIndex}`)
+  },[tabIndex])
   const hdrTextureURL = new URL('./assets/img/neon_photostudio_4k.hdr', import.meta.url);
   const theme = extendTheme({
-    colors: {
-      brand: {
-        100: "#f7fafc",
-        // ...
-        900: "#1a202c",
-      },
-    }
+    styles: {
+      global: () => ({
+        body: {
+          bg: "",
+        },
+      }),
+    },
   });
 
   return (
     <ChakraProvider theme={theme}>
-      <ThreeCanvas hdr={hdrTextureURL} model='./src/assets/models/portfolio-office.glb'/>
-       <Tabs align='center' variant='soft-rounded' colorScheme='green'> 
+      <ThreeCanvas hdr={hdrTextureURL} model='./src/assets/models/portfolio-office.glb' camIndex={tabIndex}/>
+       <Tabs onChange={(index) => setTabIndex(index)} align='center' variant='soft-rounded' colorScheme='green'> 
         <TabList>
           <Tab mr='10px' width='150px'>Who Am I?</Tab>
           <Tab mr='10px' width='150px'>My Experience</Tab>
