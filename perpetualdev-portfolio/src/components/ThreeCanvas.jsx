@@ -1,26 +1,28 @@
 import React, {useEffect, useRef } from 'react';
 import {Text} from '@chakra-ui/react'
 import * as THREE from 'three'
+import * as TWEEN from 'tween'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js'
 
 function ThreeCanvas({className, children, hdr, model, camIndex, ...props }){
+    //anything here is going to be run when the props change.
     const canvasRef = useRef(null)
-    
+    const rendererRef = useRef(null)
+    const cameraRef = useRef(null)
+    const scene = new THREE.Scene();
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
     const cameraLocations=[
-        new THREE.Vector3( 0 , 2.5, 2.5),
         new THREE.Vector3( 0.75 , 3, -4),
+        new THREE.Vector3( 0 , 2.5, 2.5),
         new THREE.Vector3( 2.75 , 3, -5.5)
-     ]
+    ]
 
+    // Set Initial Scene State (runs once)
     useEffect(() => {
-        const scene = new THREE.Scene();
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-
-
-
         const renderer = new THREE.WebGLRenderer({
             canvas: canvasRef.current,
             antialias: true
@@ -30,27 +32,26 @@ function ThreeCanvas({className, children, hdr, model, camIndex, ...props }){
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setSize( width, height);
 
+        rendererRef.current = renderer;
 
         // ----- Set Camera -----
         const camera = new THREE.PerspectiveCamera( 39.5978, width/ height, 0.1, 1000);
+        cameraRef.current = camera;
         //const controls = new OrbitControls( camera, renderer.domElement );
-        camera.position.set(cameraLocations[camIndex].x, cameraLocations[camIndex].y, cameraLocations[camIndex].z);
+        cameraRef.current.position.set(cameraLocations[camIndex].x, cameraLocations[camIndex].y, cameraLocations[camIndex].z);
         //controls.update();
-
 
         // ----- Load HDRI Lighting -----
         const hdrTextureURL = new URL(hdr, import.meta.url)
-        const loader = new RGBELoader();
+        const loader = new RGBELoader(); 
         loader.load(hdrTextureURL, function(texture) {
             texture.mapping = THREE.EquirectangularReflectionMapping;
             const rotationMatrix = new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(0, 1, 0), Math.PI);
             texture.matrix.multiply(rotationMatrix);
             texture.matrixAutoUpdate = false;
-            scene.background = texture;
+            //scene.background = texture;
             scene.environment = texture;
-            scene.environment.rotation
         })
-
 
         // ----- Load GLB Model -----
         let glb_model = new THREE.Object3D;
@@ -68,8 +69,8 @@ function ThreeCanvas({className, children, hdr, model, camIndex, ...props }){
 
         function onWindowResize(){
 
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
+            cameraRef.current.aspect = window.innerWidth / window.innerHeight;
+            cameraRef.current.updateProjectionMatrix();
 
             renderer.setSize( window.innerWidth, window.innerHeight );
 
@@ -78,13 +79,32 @@ function ThreeCanvas({className, children, hdr, model, camIndex, ...props }){
         function animate() {
             //cameraSmoothZoom(0.065);
             requestAnimationFrame( animate );
-            renderer.render(scene, camera);
+            TWEEN.update();
+            renderer.render(scene, cameraRef.current);
             //controls.update();
         }
       
         animate();
-        renderer.render(scene, camera);
+    }, [])
+
+    useEffect(() => {
+        let cameraLocationTarget = cameraLocations[camIndex].clone();
+        tweenCameraToTargetPosition(cameraLocationTarget, 1000);
     }, [camIndex])
+
+    function tweenCameraToTargetPosition(targetPosition, duration) {
+        const currentPos = cameraRef.current.position.clone();
+        console.log(cameraRef.current.position);
+        const newPos = targetPosition.clone();
+        const tween = new TWEEN.Tween(currentPos)
+          .to(newPos, duration)
+          .easing(TWEEN.Easing.Cubic.Out)
+          .onUpdate(() => {
+            cameraRef.current.position.set(currentPos.x, currentPos.y, currentPos.z);
+            //cameraRef.current.lookAt(targetPosition);
+          })
+          .start();
+    }
 
     return(
         <div>

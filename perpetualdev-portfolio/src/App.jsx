@@ -5,9 +5,10 @@ import unrealLogo from './assets/unreal-logo.svg'
 import './App.css'
 import ThreeCanvas from './components/ThreeCanvas'
 import { Text, ChakraProvider, Tabs, TabList, TabPanels, Tab, TabPanel, extendTheme} from '@chakra-ui/react'
+import { TbHome } from 'react-icons/tb'
 
 function App() {
-  const [tabIndex, setTabIndex] = useState(0)
+  const [tabIndex, setTabIndex] = useState(1)
   useEffect(() =>{
     console.log(`Tab has changed: ${tabIndex}`)
   },[tabIndex])
@@ -24,11 +25,11 @@ function App() {
 
   return (
     <ChakraProvider theme={theme}>
-      <ThreeCanvas hdr={hdrTextureURL} model='./src/assets/models/portfolio-office.glb' camIndex={tabIndex}/>
-       <Tabs onChange={(index) => setTabIndex(index)} align='center' variant='soft-rounded' colorScheme='green'> 
+      <ThreeCanvas hdr={hdrTextureURL} model='./src/assets/models/portfolio-office-AO.glb' camIndex={tabIndex}/>
+       <Tabs defaultIndex={1} onChange={(index) => setTabIndex(index)} align='center' variant='soft-rounded' colorScheme='green'> 
         <TabList>
           <Tab mr='10px' width='150px'>Who Am I?</Tab>
-          <Tab mr='10px' width='150px'>My Experience</Tab>
+          <Tab mr='10px'><TbHome size={40}/></Tab>
           <Tab mr='10px' width='150px'>My Skills/Tools</Tab>
         </TabList>
         <TabPanels>
