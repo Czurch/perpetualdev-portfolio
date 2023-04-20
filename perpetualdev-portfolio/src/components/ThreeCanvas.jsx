@@ -11,15 +11,30 @@ function ThreeCanvas({className, children, hdr, model, camIndex, ...props }){
     const canvasRef = useRef(null)
     const rendererRef = useRef(null)
     const cameraRef = useRef(null)
-    const scene = new THREE.Scene();
+    const cameraLookRef = useRef(null)
+    
     const width = window.innerWidth;
     const height = window.innerHeight;
 
     const cameraLocations=[
-        new THREE.Vector3( 0.75 , 3, -4),
-        new THREE.Vector3( 0 , 2.5, 2.5),
-        new THREE.Vector3( 2.75 , 3, -5.5)
+        new THREE.Vector3( 0.75 , 3.5, -7.1),
+        new THREE.Vector3( -4 , 1.5, 2.5),
+        new THREE.Vector3( 3.25 , 3, -6)
     ]
+    /*      These are the global coords 
+    const cameraLookLocations = [
+        new THREE.Vector3(0.75, 1, -7.1),
+        new THREE.Vector3(2 , 2.75, -10),
+        new THREE.Vector3(4.25, 2.75, -10),
+    ]
+    */
+   //  These are the new camera local diff style coords
+   const cameraLookLocations = [
+        new THREE.Vector3(0, -2.5, 0),
+        new THREE.Vector3(6 , 1.25, -12.5),
+        new THREE.Vector3(1, -0.75, -4),
+    ]
+
 
     // Set Initial Scene State (runs once)
     useEffect(() => {
@@ -34,11 +49,15 @@ function ThreeCanvas({className, children, hdr, model, camIndex, ...props }){
 
         rendererRef.current = renderer;
 
+        const scene = new THREE.Scene();
+
         // ----- Set Camera -----
         const camera = new THREE.PerspectiveCamera( 39.5978, width/ height, 0.1, 1000);
         cameraRef.current = camera;
         //const controls = new OrbitControls( camera, renderer.domElement );
         cameraRef.current.position.set(cameraLocations[camIndex].x, cameraLocations[camIndex].y, cameraLocations[camIndex].z);
+        cameraRef.current.lookAt(cameraLookLocations[camIndex]);
+        cameraLookRef.current = cameraLookLocations[camIndex].clone();
         //controls.update();
 
         // ----- Load HDRI Lighting -----
@@ -89,21 +108,37 @@ function ThreeCanvas({className, children, hdr, model, camIndex, ...props }){
 
     useEffect(() => {
         let cameraLocationTarget = cameraLocations[camIndex].clone();
-        tweenCameraToTargetPosition(cameraLocationTarget, 1000);
+        createVectorTween(cameraLookRef.current, cameraLookLocations[camIndex], 1000, TWEEN.Easing.Sinusoidal.Out)
+        tweenCameraToTargetPosition(cameraLocationTarget, 800);
     }, [camIndex])
 
     function tweenCameraToTargetPosition(targetPosition, duration) {
         const currentPos = cameraRef.current.position.clone();
-        console.log(cameraRef.current.position);
+        //console.log(cameraRef.current.position);
         const newPos = targetPosition.clone();
         const tween = new TWEEN.Tween(currentPos)
           .to(newPos, duration)
           .easing(TWEEN.Easing.Cubic.Out)
           .onUpdate(() => {
             cameraRef.current.position.set(currentPos.x, currentPos.y, currentPos.z);
+            cameraRef.current.lookAt(cameraRef.current.position + cameraLookRef.current);
             //cameraRef.current.lookAt(targetPosition);
           })
           .start();
+    }
+
+    function createVectorTween(from, to, duration, easing)
+    {
+        const currentPos = from.clone();
+        const newPos = to.clone();
+        const tween = new TWEEN.Tween(currentPos)
+            .to(newPos, duration)
+            .easing(easing)
+            .onUpdate(() => {
+                from.copy(currentPos)
+                console.log(currentPos)
+            })
+            .start();
     }
 
     return(
