@@ -1,13 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
   color: black;
+  --card-bg-color: rgba(34, 34, 34, 0.846);
 }
 
 body {
   background-color: transparent;
+}
+
+h2 {
+  size: 2rem;
+  font-weight: 700;
 }
 
 .logo {
@@ -36,4 +46,44 @@ body {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
+}
+
+.flex {
+  display: flex;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.column {
+  flex-direction: column;
+}
+.space-around {
+
+}
+
+
+.reference-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: flex-start;
+  width: 25%;
+  height: 30%;
+  padding: 1rem;
+  color:white;
+  background-color: var(--card-bg-color);
+  border-radius: 0.5rem;
+}
+.reference-card h2 {
+  text-align: left;
+}
+
+.reference-card h3 {
+  text-align: left;
+}
+
+.reference-card p {
+  padding-top: 1rem;
 }
