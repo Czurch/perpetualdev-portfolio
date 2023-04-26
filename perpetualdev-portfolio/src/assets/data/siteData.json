@@ -1,20 +1,22 @@
 {
-    "references": [
-        {
-            "name": "Mark Hatch",
-            "title": "Sofware Craftsman at Pluralsight",
-            "profileSrc": "https://www.linkedin.com/in/hatchmark?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3B1Q0EKu%2FlTB%2Bl3yKPJo0USg%3D%3D",
-            "message": "Luke is an amazing engineer and an all-around great guy. I worked closely with Luke for a year and was always so impressed with his attention to detail, passion to learn and grow, and desire to understand how things work. Luke is an excellent communicator and team player. He is a great asset to our team and any future team that is lucky enough to have him."
-        },
-        {
-            "name": "Jared Loosli",
-            "title": "Director Of Software Development at Pluralsight",
-            "profileSrc": "https://www.linkedin.com/in/jaredloosli?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3B1Q0EKu%2FlTB%2Bl3yKPJo0USg%3D%3D",
-            "message": "I loved working with Luke. He came onto a team that was well established, but had some tricky issues to figure out and Luke jumped in head first right from the start. While he was diligent in the day to day needs of the team, one thing that stood out to me was that Luke would often look ahead to understand what was needed by him or his team in the future. His ability to understand both the macro and micro view of the team's projects was very impressive. Luke was also very diligent in his own personal growth. We talked many times about skills that he would like to develop, both for his own edification and to fulfill his team's needs, and Luke was always thoughtful about managing plans to develop those skills. He definitely has a growth mindset that I appreciated. I would gladly work with Luke again and think he would be a great asset on whatever organization he works with."
-        }
-    ],
-    "coordinates": {
-        "lattitude": 41.8300777,
-        "longitude": -71.4147935
+  "references": [
+    {
+      "name": "Mark Hatch",
+      "initials": "MH",
+      "title": "Sofware Craftsman at Pluralsight",
+      "profileSrc": "https://www.linkedin.com/in/hatchmark?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3B1Q0EKu%2FlTB%2Bl3yKPJo0USg%3D%3D",
+      "message": "Luke is an amazing engineer and an all-around great guy. I worked closely with Luke for a year and was always so impressed with his attention to detail, passion to learn and grow, and desire to understand how things work. Luke is an excellent communicator and team player. He is a great asset to our team and any future team that is lucky enough to have him."
+    },
+    {
+      "name": "Jared Loosli",
+      "initials": "JL",
+      "title": "Director Of Software Development at Pluralsight",
+      "profileSrc": "https://www.linkedin.com/in/jaredloosli?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3B1Q0EKu%2FlTB%2Bl3yKPJo0USg%3D%3D",
+      "message": "I loved working with Luke. He came onto a team that was well established, but had some tricky issues to figure out and Luke jumped in head first right from the start. While he was diligent in the day to day needs of the team, one thing that stood out to me was that Luke would often look ahead to understand what was needed by him or his team in the future. His ability to understand both the macro and micro view of the team's projects was very impressive. Luke was also very diligent in his own personal growth. We talked many times about skills that he would like to develop, both for his own edification and to fulfill his team's needs, and Luke was always thoughtful about managing plans to develop those skills. He definitely has a growth mindset that I appreciated. I would gladly work with Luke again and think he would be a great asset on whatever organization he works with."
     }
+  ],
+  "coordinates": {
+    "lattitude": 41.8300777,
+    "longitude": -71.4147935
+  }
 }
