@@ -24,10 +24,10 @@ function ThreeCanvas({ className, children, hdr, model, camIndex, ...props }) {
 
   const cameraLocations = [
     new THREE.Vector3(0.75, 3.5, -7.1),
-    new THREE.Vector3(0, 0, 0),
+    new THREE.Vector3(-3.5, 4, -7),
     new THREE.Vector3(-4, 1.5, 2.5),
     new THREE.Vector3(3.25, 3, -6),
-    new THREE.Vector3(0, 0, 0),
+    new THREE.Vector3(3.25, 3, -6),
   ];
   /*      These are the global coords 
     const cameraLookLocations = [
@@ -39,10 +39,10 @@ function ThreeCanvas({ className, children, hdr, model, camIndex, ...props }) {
   //  These are the new camera local diff style coords
   const cameraLookLocations = [
     new THREE.Vector3(0, -2.5, -0.1),
-    new THREE.Vector3(0, 0, 0),
-    new THREE.Vector3(6, 1.25, -12.5),
-    new THREE.Vector3(1, -0.75, -4),
-    new THREE.Vector3(0, 0, 0),
+    new THREE.Vector3(0, -2, -2),
+    new THREE.Vector3(5, 1.25, -12.5),
+    new THREE.Vector3(1, -0.1, -4),
+    new THREE.Vector3(1, 0, 0),
   ];
 
   // Set Initial Scene State (runs once)
@@ -92,19 +92,35 @@ function ThreeCanvas({ className, children, hdr, model, camIndex, ...props }) {
     //controls.update();
 
     // ----- Load HDRI Lighting -----
-    const hdrTextureURL = new URL(hdr, import.meta.url);
-    const loader = new RGBELoader();
-    loader.load(hdrTextureURL, function (texture) {
-      texture.mapping = THREE.EquirectangularReflectionMapping;
-      const rotationMatrix = new THREE.Matrix4().makeRotationAxis(
-        new THREE.Vector3(0, 1, 0),
-        Math.PI
-      );
-      texture.matrix.multiply(rotationMatrix);
-      texture.matrixAutoUpdate = false;
-      //scene.background = texture;
-      scene.environment = texture;
-    });
+    if (hdr) {
+      const hdrTextureURL = new URL(hdr, import.meta.url);
+      const loader = new RGBELoader();
+      loader.load(hdrTextureURL, function (texture) {
+        texture.mapping = THREE.EquirectangularReflectionMapping;
+        const rotationMatrix = new THREE.Matrix4().makeRotationAxis(
+          new THREE.Vector3(0, 1, 0),
+          Math.PI
+        );
+        texture.matrix.multiply(rotationMatrix);
+        texture.matrixAutoUpdate = false;
+        //scene.background = texture;
+        scene.environment = texture;
+      });
+    } else {
+      const exteriorLight = new THREE.PointLight(0xf9fece, 10, 20);
+      exteriorLight.position.set(-8.811, 8, -14.264);
+      scene.add(exteriorLight);
+      const RoomLight = new THREE.PointLight(0xfee59f, 5, 11);
+      RoomLight.position.set(-1.602, 5.331, 0.035);
+      scene.add(RoomLight);
+      const ambientGold = new THREE.PointLight(0xffd285, 5, 7);
+      ambientGold.position.set(3.711, 3.617, -1.5);
+      scene.add(ambientGold);
+      const ambientBlue = new THREE.PointLight(0xdbf1fe, 7.5, 10);
+      ambientBlue.position.set(-7.313, 3.842, 0);
+      scene.add(ambientBlue);
+      scene.background = new THREE.Color(139, 159, 223);
+    }
 
     // ----- Load GLB Model -----
     let glb_model = new THREE.Object3D();
