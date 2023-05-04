@@ -18,11 +18,11 @@ function App() {
 
   return (
     <div className="App">
-      {/*<ThreeCanvas
-          hdr={hdrTextureURL}
-          model="./src/assets/models/portfolio-office-v4.glb"
-          camIndex={tabIndex}
-      />*/}
+      <ThreeCanvas
+        hdr={hdrTextureURL}
+        model="./src/assets/models/portfolio-office-v4.glb"
+        camIndex={tabIndex}
+      />
       <OfficeCanvas />
       <TabbedContent
         onTabChange={(t) => {

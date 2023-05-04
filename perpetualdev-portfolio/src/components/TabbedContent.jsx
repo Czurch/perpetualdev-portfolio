@@ -5,11 +5,8 @@ import Reference from "./Reference";
 import { TbHome } from "react-icons/tb";
 import * as weather from "../utilities/weather";
 import data from "../assets/data/siteData.json";
-import reactLogo from "../assets/react.svg";
-import githubLogo from "../assets/github-mark-white.svg";
-import unrealLogo from "../assets/unreal-logo.svg";
 import ToolIcon from "./ToolIcon";
-import PopoverIcon from "./PopoverIcon";
+import Profile from "./Profile";
 
 const TabbedContent = ({ onTabChange, ...props }) => {
   const [weatherCondition, setWeatherCondition] = useState({
@@ -27,6 +24,7 @@ const TabbedContent = ({ onTabChange, ...props }) => {
   useEffect(() => {
     weather.getCurrentWeather().then((w) => {
       setWeatherCondition(w);
+      console.log(weatherCondition);
     });
   }, []);
 
@@ -76,38 +74,7 @@ const TabbedContent = ({ onTabChange, ...props }) => {
         value="0"
       >
         {/*WHO AM I*/}
-        <h1>My name is Luke Ferreira.</h1>
-        <PopoverIcon />
-        <p className="mb-5 text-mauve11 text-[15px] leading-normal">
-          I am a Boston-based Software Engineer and Indie Developer. I have a
-          Bachelors in Computer Information Science from the University of
-          Massachusetts Dartmouth. Starting from an early age, I learned how to
-          create dynamic animations with adobe flash, then persued game
-          development in Unity and Unreal Engine which ultimately leading to
-          higher education in Comp Sci to learn the ins and out of programming.
-          I take pride in my ability to learn anything related to computers.
-          From video editing, photo editing, web development, 3D illustration I
-          have yet to find a discipline of computer applications that doesnt
-          spark the joy of learning. My first years of employment helped me
-          understand the full development lifecycle. Being in a role surrounded
-          by colleagues with decades of experience helped to quickly envisage
-          concepts of computer architecture that we invisible to me before.
-          However, this role left me with a distict lack of experience in
-          leadership. I found my stride at my previous job where I was able to
-          lead a product aquisition team and evaluate and plan key changes to
-          both platforms movign forward. In my next role I'm looking for a
-          project that ignites my passion to learn and allows me to work with
-          individuals who are as eager as I am to create elegant and cutting
-          edge technology.
-        </p>
-        <h3>Don't believe me? Hear what others have to say about me.</h3>
-        <div className="flex flex-row">
-          <Reference reference={data.references[0]} />
-          <Reference reference={data.references[1]} />
-        </div>
-        <a href="https://github.com/czurch" target="_blank">
-          <img src={githubLogo} className="logo" alt="Vite logo" />
-        </a>
+        <Profile />
       </Tabs.Content>
       <Tabs.Content
         className="grow p-5 bg-transparent rounded-b-md outline-none "
@@ -160,6 +127,9 @@ const TabbedContent = ({ onTabChange, ...props }) => {
             In Providence, RI is currently {weatherCondition.weatherStatus}{" "}
             during the {weatherCondition.time}
           </h1>
+          <img
+            src={`./img/weather/weather-${weatherCondition.time}-${weatherCondition.weatherStatus}.png`}
+          ></img>
         </div>
       </Tabs.Content>
       <Tabs.Content
@@ -169,20 +139,15 @@ const TabbedContent = ({ onTabChange, ...props }) => {
         {/*TOOLKIT*/}
         <div className="flex justify-center">
           <div className="flex flex-row flex-wrap w-2/3 mt-16">
-            <ToolIcon
-              title="Unreal Engine"
-              imgsrc={unrealLogo}
-              link="https://www.unrealengine.com/"
-              alt="UE logo"
-              description="Unreal Engine is the world's most open and advanced real-time 3D creation tool for photoreal visuals and immersive experiences."
-            ></ToolIcon>
-            <ToolIcon
-              title="React"
-              imgsrc={reactLogo}
-              link="https://reactjs.org"
-              alt="React logo"
-              description="React is a free and open-source front-end JavaScript library for building user interfaces based on components. It is maintained by Meta and a community of individual developers and companies."
-            ></ToolIcon>
+            {data.tools.map((tool) => (
+              <ToolIcon
+                title={tool.title}
+                imgsrc={tool.imgsrc}
+                link={tool.link}
+                alt={tool.alt}
+                description={tool.description}
+              ></ToolIcon>
+            ))}
           </div>
         </div>
       </Tabs.Content>
