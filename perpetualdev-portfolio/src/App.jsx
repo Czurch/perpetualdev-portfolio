@@ -4,6 +4,8 @@ import ThreeCanvas from "./components/ThreeCanvas";
 import TabbedContent from "./components/TabbedContent";
 import coffeeLoop from "./assets/img/coffee-loop.gif";
 import OfficeCanvas from "./components/Office";
+import CoffeeLoader from "./components/CoffeeLoader";
+import DevInProgress from "./components/DevInProgress";
 
 function App() {
   const [tabIndex, setTabIndex] = useState(2);
@@ -18,17 +20,18 @@ function App() {
 
   return (
     <div className="App">
+      <DevInProgress />
       {/*<ThreeCanvas
           hdr={hdrTextureURL}
           model="./src/assets/models/portfolio-office-v4.glb"
           camIndex={tabIndex}
-      />*/}
+      />
       <OfficeCanvas />
       <TabbedContent
         onTabChange={(t) => {
           setTabIndex(t);
         }}
-      ></TabbedContent>
+      ></TabbedContent>*/}
     </div>
   );
 }
