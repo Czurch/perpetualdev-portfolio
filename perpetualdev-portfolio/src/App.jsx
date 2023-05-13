@@ -3,7 +3,8 @@ import "./App.css";
 import ThreeCanvas from "./components/ThreeCanvas";
 import TabbedContent from "./components/TabbedContent";
 import coffeeLoop from "./assets/img/coffee-loop.gif";
-import ModelCanvas from "./components/ModelCanvas";
+import CoffeeLoader from "./components/CoffeeLoader";
+import DevInProgress from "./components/DevInProgress";
 
 function App() {
   const [tabIndex, setTabIndex] = useState(2);
