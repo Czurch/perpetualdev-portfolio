@@ -12,7 +12,7 @@ const Reference = ({ reference, ...props }) => {
             alt={reference.name}
           />
           <Avatar.Fallback
-            className="text-violet11 leading-1 flex h-full w-full items-center justify-center bg-white text-[15px] font-medium"
+            className="text-accent leading-1 flex h-full w-full items-center justify-center bg-white text-[15px] font-medium"
             delayMs={600}
           >
             {reference.initials}

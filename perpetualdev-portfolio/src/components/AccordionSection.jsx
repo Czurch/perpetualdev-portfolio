@@ -2,6 +2,7 @@ import React from "react";
 import * as Accordion from "@radix-ui/react-accordion";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import data from "../assets/data/siteData.json";
+import ModelCanvas from "./ModelCanvas";
 
 const AccordionSection = () => (
   <Accordion.Root
@@ -11,18 +12,39 @@ const AccordionSection = () => (
     collapsible
   >
     <AccordionItem value="item-1">
-      <AccordionTrigger>Early Life</AccordionTrigger>
-      <AccordionContent>{data.profile["early-life"]}</AccordionContent>
+      <div className="flex w-full justify-center px-70">
+        <AccordionTrigger>
+          <ModelCanvas model="gameboy" rotateforward={false} className="m-7" />
+          <div className="p-32" />
+        </AccordionTrigger>
+      </div>
+      <AccordionContent>
+        <h2>Early Life</h2> {data.profile["early-life"]}
+      </AccordionContent>
     </AccordionItem>
 
     <AccordionItem value="item-2">
-      <AccordionTrigger>Early Career</AccordionTrigger>
-      <AccordionContent>{data.profile["early-career"]}</AccordionContent>
+      <div className="flex w-full justify-center px-70">
+        <AccordionTrigger>
+          <div className="p-32" />
+          <ModelCanvas model="gradcap" rotateforward={true} className="m-7" />
+        </AccordionTrigger>
+      </div>
+      <AccordionContent>
+        <h2>Early Career</h2> {data.profile["early-career"]}
+      </AccordionContent>
     </AccordionItem>
 
     <AccordionItem value="item-3">
-      <AccordionTrigger>Present Day</AccordionTrigger>
-      <AccordionContent>{data.profile["present-day"]}</AccordionContent>
+      <div className="flex w-full justify-center px-70">
+        <AccordionTrigger>
+          <ModelCanvas model="console" rotateforward={false} className="m-7" />
+          <div className="p-32" />
+        </AccordionTrigger>
+      </div>
+      <AccordionContent>
+        <h2>Present Day</h2> {data.profile["present-day"]}
+      </AccordionContent>
     </AccordionItem>
   </Accordion.Root>
 );
@@ -30,7 +52,7 @@ const AccordionSection = () => (
 const AccordionItem = React.forwardRef(
   ({ children, className, ...props }, forwardedRef) => (
     <Accordion.Item
-      className="focus-within:shadow-mauve12 mt-px overflow-hidden first:mt-0 first:rounded-t last:rounded-b focus-within:relative focus-within:z-10"
+      className="focus-within:shadow-mauve12 mt-px overflow-hidden first:mt-0 rounded-lg focus-within:relative focus-within:z-10"
       {...props}
       ref={forwardedRef}
     >
@@ -43,15 +65,11 @@ const AccordionTrigger = React.forwardRef(
   ({ children, className, ...props }, forwardedRef) => (
     <Accordion.Header className="flex">
       <Accordion.Trigger
-        className="text-mauve2 shadow-mauve6 hover:bg-primarybg group flex h-[45px] flex-1 cursor-default items-center justify-between bg-transparent px-5 text-[15px] leading-none outline-none"
+        className="text-mauve2 shadow-mauve group flex self-end h-full flex-1 cursor-default items-center justify-between bg-transparent px-5 text-[15px] leading-none outline-none"
         {...props}
         ref={forwardedRef}
       >
         {children}
-        <ChevronDownIcon
-          className="text-violet10 ease-[cubic-bezier(0.87,_0,_0.13,_1)] transition-transform duration-300 group-data-[state=open]:rotate-180"
-          aria-hidden
-        />
       </Accordion.Trigger>
     </Accordion.Header>
   )
@@ -60,7 +78,7 @@ const AccordionTrigger = React.forwardRef(
 const AccordionContent = React.forwardRef(
   ({ children, className, ...props }, forwardedRef) => (
     <Accordion.Content
-      className="text-mauve11 bg-primarybg data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp overflow-hidden text-[15px]"
+      className="text-primary bg-secondary data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp overflow-hidden text-[15px]"
       {...props}
       ref={forwardedRef}
     >

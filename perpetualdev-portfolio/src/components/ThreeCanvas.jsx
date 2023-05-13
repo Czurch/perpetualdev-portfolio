@@ -13,7 +13,6 @@ import {
 function ThreeCanvas({ className, children, hdr, model, camIndex, ...props }) {
   //anything here is going to be run when the props change.
   const canvasRef = useRef(null);
-  const cssCanvasRef = useRef(null);
   const rendererRef = useRef(null);
   const cameraRef = useRef(null);
   const cameraLookRef = useRef(null);
@@ -58,16 +57,16 @@ function ThreeCanvas({ className, children, hdr, model, camIndex, ...props }) {
     renderer.setSize(width, height);
     rendererRef.current = renderer;
 
-    // ----- Set CSS Renderer -----
+    /* ----- Set CSS Renderer -----
     let cssRenderer = new CSS3DRenderer({
       element: cssCanvasRef.current,
       antialias: true,
     });
     cssRenderer.outputEncoding = THREE.sRGBEncoding;
-    cssRenderer.setSize(width, height);
+    cssRenderer.setSize(width, height);*/
 
     const scene = new THREE.Scene();
-    const cssScene = new THREE.Scene();
+    //const cssScene = new THREE.Scene();
 
     // ----- Set Camera -----
     const camera = new THREE.PerspectiveCamera(
@@ -155,7 +154,7 @@ function ThreeCanvas({ className, children, hdr, model, camIndex, ...props }) {
       cameraRef.current.updateProjectionMatrix();
 
       renderer.setSize(window.innerWidth, window.innerHeight);
-      cssRenderer.setSize(window.innerWidth, window.innerHeight);
+      //cssRenderer.setSize(window.innerWidth, window.innerHeight);
     }
 
     function animate() {
@@ -221,11 +220,6 @@ function ThreeCanvas({ className, children, hdr, model, camIndex, ...props }) {
 
   return (
     <div>
-      <canvas
-        style={{ position: "fixed", top: 0, left: 0, zIndex: -1 }}
-        id="css-viewer"
-        ref={cssCanvasRef}
-      ></canvas>
       <canvas
         style={{ position: "fixed", top: 0, left: 0, zIndex: -2 }}
         id="viewer"

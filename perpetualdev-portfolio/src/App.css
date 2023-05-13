@@ -35,6 +35,15 @@ h2 {
   filter: drop-shadow(0 0 0.5em #ffffff);
 }
 
+.model {
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.model:hover {
+  filter: drop-shadow(0 0 3em theme("colors.primaryButton"));
+}
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -71,7 +80,7 @@ h2 {
   height: 30%;
   padding: 1rem;
   color: white;
-  background-color: var(--card-bg-color);
+  background-color: theme("colors.secondary");
   border-radius: 0.5rem;
 }
 .reference-card h2 {
@@ -94,7 +103,7 @@ h2 {
   height: 35px;
   margin-top: 5px;
   border-radius: 5rem;
-  background-color: #92f0c1;
+  background-color: theme("colors.primaryButton");
   transition: all 0.3s ease-in-out;
   z-index: 0;
 }

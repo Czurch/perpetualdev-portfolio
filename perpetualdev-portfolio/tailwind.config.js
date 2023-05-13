@@ -10,9 +10,14 @@ export default {
         ...green,
         ...mauve,
         ...violet,
-        primarybg: "rgba(8, 47, 73, 0.7)",
-        primary: "#075985",
         cta: "#F46036",
+        primarybg: "rgba(8, 47, 73, 0.7)",
+        secondarybg: "#2a303c",
+        primary: "#fbfefd",
+        secondary: "#1f2531",
+        primaryButton: "#d9b311",
+        secondaryButton: "#0b3c5d",
+        accent: "#328bc3",
       },
       keyframes: {
         slideDown: {

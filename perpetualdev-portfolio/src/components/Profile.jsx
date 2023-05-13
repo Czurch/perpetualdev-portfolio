@@ -20,7 +20,11 @@ const Profile = (...props) => {
         ))}
       </div>
       <a href="https://github.com/czurch" target="_blank">
-        <img src="" className="logo" alt="Vite logo" />
+        <img
+          src="./img/github-mark-white.svg"
+          className="logo"
+          alt="Github logo"
+        />
       </a>
     </div>
   );
