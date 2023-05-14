@@ -21,7 +21,7 @@ function App() {
     <div className="App">
       <ThreeCanvas
         hdr={hdrTextureURL}
-        model="./src/assets/models/portfolio-office-v4.glb"
+        model="./models/portfolio-office-baked.glb"
         camIndex={tabIndex}
       />
       <TabbedContent

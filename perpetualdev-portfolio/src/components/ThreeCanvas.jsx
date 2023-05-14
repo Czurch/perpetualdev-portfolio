@@ -26,7 +26,7 @@ function ThreeCanvas({ className, children, hdr, model, camIndex, ...props }) {
     new THREE.Vector3(-3.5, 4, -7),
     new THREE.Vector3(-4, 1.5, 2.5),
     new THREE.Vector3(3.25, 3, -6),
-    new THREE.Vector3(3.25, 3, -6),
+    new THREE.Vector3(5.55, 2.65, -6.95),
   ];
   /*      These are the global coords 
     const cameraLookLocations = [
@@ -103,7 +103,7 @@ function ThreeCanvas({ className, children, hdr, model, camIndex, ...props }) {
         texture.matrix.multiply(rotationMatrix);
         texture.matrixAutoUpdate = false;
         //scene.background = texture;
-        scene.environment = texture;
+        //scene.environment = texture;
       });
     } else {
       const exteriorLight = new THREE.PointLight(0xf9fece, 10, 20);
