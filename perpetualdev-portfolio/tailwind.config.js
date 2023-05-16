@@ -16,6 +16,7 @@ export default {
         primary: "#fbfefd",
         secondary: "#1f2531",
         primaryButton: "#d9b311",
+        primaryButtonHover: "#f9c321",
         secondaryButton: "#0b3c5d",
         accent: "#328bc3",
       },
