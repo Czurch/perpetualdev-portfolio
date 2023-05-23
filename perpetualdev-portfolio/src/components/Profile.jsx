@@ -14,7 +14,7 @@ const Profile = (...props) => {
       <h3>Don't believe me? Hear what others have to say!</h3>
       <div className="flex flex-col w-2/3 self-center">
         {data.references.map((reference, ix) => (
-          <div className={`m-4 ${ix % 2 ? "self-end" : "self-start"}`}>
+          <div id={ix} className={`m-4 ${ix % 2 ? "self-end" : "self-start"}`}>
             <Reference reference={reference} />
           </div>
         ))}

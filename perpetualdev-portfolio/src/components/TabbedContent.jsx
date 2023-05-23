@@ -110,8 +110,9 @@ const TabbedContent = ({ onTabChange, ...props }) => {
         {/*TOOLKIT*/}
         <div className="flex justify-center">
           <div className="flex flex-row flex-wrap w-2/3 mt-16">
-            {data.tools.map((tool) => (
+            {data.tools.map((tool, ix) => (
               <ToolIcon
+                key={ix}
                 title={tool.title}
                 imgsrc={tool.imgsrc}
                 link={tool.link}
