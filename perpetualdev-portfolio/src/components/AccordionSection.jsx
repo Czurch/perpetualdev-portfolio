@@ -62,17 +62,35 @@ const AccordionItem = React.forwardRef(
 );
 
 const AccordionTrigger = React.forwardRef(
-  ({ children, className, ...props }, forwardedRef) => (
-    <Accordion.Header className="flex">
-      <Accordion.Trigger
-        className="text-mauve2 shadow-mauve group flex self-end h-full flex-1 cursor-default items-center justify-between bg-transparent px-5 text-[15px] leading-none outline-none"
-        {...props}
-        ref={forwardedRef}
-      >
-        {children}
-      </Accordion.Trigger>
-    </Accordion.Header>
-  )
+  ({ children, className, ...props }, forwardedRef) => {
+    const handleClick = () => {
+      // Scroll to the AccordionContent when the trigger is clicked
+      const accordionContent = document.querySelector(".accordion-content");
+      if (accordionContent) {
+        const triggerRect = forwardedRef.current.getBoundingClientRect();
+        const contentRect = accordionContent.getBoundingClientRect();
+        const scrollPosition =
+          contentRect.top -
+          window.innerHeight / 2 +
+          contentRect.height / 2 -
+          triggerRect.height / 2;
+        window.scrollTo({ top: scrollPosition, behavior: "smooth" });
+      }
+    };
+
+    return (
+      <Accordion.Header className="flex">
+        <Accordion.Trigger
+          className="text-mauve2 shadow-mauve group flex self-end h-full flex-1 cursor-default items-center justify-between bg-transparent px-5 text-[15px] leading-none outline-none"
+          onClick={handleClick}
+          {...props}
+          ref={forwardedRef}
+        >
+          {children}
+        </Accordion.Trigger>
+      </Accordion.Header>
+    );
+  }
 );
 
 const AccordionContent = React.forwardRef(
