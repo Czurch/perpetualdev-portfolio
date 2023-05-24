@@ -52,7 +52,7 @@ const AccordionSection = () => (
 const AccordionItem = React.forwardRef(
   ({ children, className, ...props }, forwardedRef) => (
     <Accordion.Item
-      className="focus-within:shadow-mauve12 mt-px overflow-hidden first:mt-0 rounded-lg focus-within:relative focus-within:z-10"
+      className="accordion-content focus-within:shadow-mauve12 mt-px overflow-hidden first:mt-0 rounded-lg focus-within:relative focus-within:z-10"
       {...props}
       ref={forwardedRef}
     >
@@ -63,18 +63,15 @@ const AccordionItem = React.forwardRef(
 
 const AccordionTrigger = React.forwardRef(
   ({ children, className, ...props }, forwardedRef) => {
-    const handleClick = () => {
+    const handleClick = (e) => {
       // Scroll to the AccordionContent when the trigger is clicked
       const accordionContent = document.querySelector(".accordion-content");
       if (accordionContent) {
-        const triggerRect = forwardedRef.current.getBoundingClientRect();
+        const triggerRect = e.target.getBoundingClientRect();
+        console.log(accordionContent);
         const contentRect = accordionContent.getBoundingClientRect();
-        const scrollPosition =
-          contentRect.top -
-          window.innerHeight / 2 +
-          contentRect.height / 2 -
-          triggerRect.height / 2;
-        window.scrollTo({ top: scrollPosition, behavior: "smooth" });
+        const scrollposition = triggerRect.top - triggerRect.height / 2;
+        window.scrollTo({ top: scrollposition, behavior: "smooth" });
       }
     };
 
