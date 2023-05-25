@@ -3,18 +3,13 @@ import * as Tabs from "@radix-ui/react-tabs";
 import "../App.css";
 import Reference from "./Reference";
 import { TbHome } from "react-icons/tb";
-import * as weather from "../utilities/weather";
 import data from "../assets/data/siteData.json";
 import ToolIcon from "./ToolIcon";
 import Profile from "./Profile";
 import Experience from "./Experience";
 import ContactModal from "./ContactModal";
 
-const TabbedContent = ({ onTabChange, ...props }) => {
-  const [weatherCondition, setWeatherCondition] = useState({
-    time: "night",
-    weatherStatus: "catsanddogs",
-  });
+const TabbedContent = ({ onTabChange, weatherCondition, ...props }) => {
   const [activeTab, setActiveTab] = useState(2);
 
   let tabChanged = false;
@@ -22,13 +17,6 @@ const TabbedContent = ({ onTabChange, ...props }) => {
     onTabChange(activeTab);
     tabChanged = true;
   }, [activeTab]);
-
-  useEffect(() => {
-    weather.getCurrentWeather().then((w) => {
-      setWeatherCondition(w);
-      console.log(weatherCondition);
-    });
-  }, []);
 
   return (
     <Tabs.Root
@@ -98,9 +86,6 @@ const TabbedContent = ({ onTabChange, ...props }) => {
             In Providence, RI is currently {weatherCondition.weatherStatus}{" "}
             during the {weatherCondition.time}
           </h1>
-          <img
-            src={`./img/weather/weather-${weatherCondition.time}-${weatherCondition.weatherStatus}.png`}
-          ></img>
         </div>
       </Tabs.Content>
       <Tabs.Content
@@ -109,7 +94,7 @@ const TabbedContent = ({ onTabChange, ...props }) => {
       >
         {/*TOOLKIT*/}
         <div className="flex justify-center">
-          <div className="flex flex-row flex-wrap w-2/3 mt-16">
+          <div className="flex flex-row flex-wrap w-3/5 mt-16">
             {data.tools.map((tool, ix) => (
               <ToolIcon
                 key={ix}
