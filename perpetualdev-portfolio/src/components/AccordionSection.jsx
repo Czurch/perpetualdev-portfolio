@@ -52,7 +52,7 @@ const AccordionSection = () => (
 const AccordionItem = React.forwardRef(
   ({ children, className, ...props }, forwardedRef) => (
     <Accordion.Item
-      className="focus-within:shadow-mauve12 mt-px overflow-hidden first:mt-0 rounded-lg focus-within:relative focus-within:z-10"
+      className="accordion-content focus-within:shadow-mauve12 mt-px overflow-hidden first:mt-0 rounded-lg focus-within:relative focus-within:z-10"
       {...props}
       ref={forwardedRef}
     >
@@ -62,17 +62,32 @@ const AccordionItem = React.forwardRef(
 );
 
 const AccordionTrigger = React.forwardRef(
-  ({ children, className, ...props }, forwardedRef) => (
-    <Accordion.Header className="flex">
-      <Accordion.Trigger
-        className="text-mauve2 shadow-mauve group flex self-end h-full flex-1 cursor-default items-center justify-between bg-transparent px-5 text-[15px] leading-none outline-none"
-        {...props}
-        ref={forwardedRef}
-      >
-        {children}
-      </Accordion.Trigger>
-    </Accordion.Header>
-  )
+  ({ children, className, ...props }, forwardedRef) => {
+    const handleClick = (e) => {
+      // Scroll to the AccordionContent when the trigger is clicked
+      const accordionContent = document.querySelector(".accordion-content");
+      if (accordionContent) {
+        const triggerRect = e.target.getBoundingClientRect();
+        console.log(accordionContent);
+        const contentRect = accordionContent.getBoundingClientRect();
+        const scrollposition = triggerRect.top - triggerRect.height / 2;
+        window.scrollTo({ top: scrollposition, behavior: "smooth" });
+      }
+    };
+
+    return (
+      <Accordion.Header className="flex">
+        <Accordion.Trigger
+          className="text-mauve2 shadow-mauve group flex self-end h-full flex-1 cursor-default items-center justify-between bg-transparent px-5 text-[15px] leading-none outline-none"
+          onClick={handleClick}
+          {...props}
+          ref={forwardedRef}
+        >
+          {children}
+        </Accordion.Trigger>
+      </Accordion.Header>
+    );
+  }
 );
 
 const AccordionContent = React.forwardRef(

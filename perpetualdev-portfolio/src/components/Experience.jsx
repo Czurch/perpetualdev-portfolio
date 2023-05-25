@@ -43,7 +43,7 @@ const Experience = ({ props }) => {
               </h4>
             </div>
             <div className="self-end text-sm">
-              <h3>Software Engineer July 2016 – 2022</h3>
+              <h3>Software Engineer 2016–2022</h3>
             </div>
           </div>
           <div>

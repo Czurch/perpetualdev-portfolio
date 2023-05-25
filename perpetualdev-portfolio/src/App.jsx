@@ -5,9 +5,22 @@ import TabbedContent from "./components/TabbedContent";
 import coffeeLoop from "./assets/img/coffee-loop.gif";
 import CoffeeLoader from "./components/CoffeeLoader";
 import DevInProgress from "./components/DevInProgress";
+import OfficeCanvas from "./components/OfficeCanvas";
+import * as weather from "./utilities/weather";
 
 function App() {
   const [tabIndex, setTabIndex] = useState(2);
+  const [weatherCondition, setWeatherCondition] = useState({
+    time: "night",
+    weatherStatus: "catsanddogs",
+  });
+
+  useEffect(() => {
+    weather.getCurrentWeather().then((w) => {
+      setWeatherCondition(w);
+      console.log(weatherCondition);
+    });
+  }, []);
 
   useEffect(() => {
     console.log(`Tab has changed: ${tabIndex}`);
@@ -19,15 +32,12 @@ function App() {
 
   return (
     <div className="App">
-      <ThreeCanvas
-        hdr={hdrTextureURL}
-        model="./models/portfolio-office-baked.glb"
-        camIndex={tabIndex}
-      />
+      <OfficeCanvas camIndex={tabIndex} weather={weatherCondition} />
       <TabbedContent
         onTabChange={(t) => {
           setTabIndex(t);
         }}
+        weatherCondition={weatherCondition}
       ></TabbedContent>
     </div>
   );

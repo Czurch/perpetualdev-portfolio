@@ -55,13 +55,17 @@ const ContactModal = ({ props }) => {
   };
 
   return (
-    <div className="flex flex-col w-full h-screen p-12 justify-start items-center top-1/2">
+    <div className="flex flex-col w-full h-screen p-12 pt-16 justify-start items-center">
       <div className="flex flex-col justify-between w-2/3 h-5/6">
         <p className="mb-5 text-black text-[15px] leading-normal justify-self-start">
           Like what you see? Please feel free to contact me regarding; job
           opportunities, consultation, or commisions for 3D art.
         </p>
-        <form ref={formRef} onSubmit={handleSubmit}>
+        <form
+          className="flex flex-col h-full justify-between"
+          ref={formRef}
+          onSubmit={handleSubmit}
+        >
           <fieldset className="mb-[15px] w-full flex flex-col justify-start">
             <label
               className="text-[13px] leading-none mb-2.5 text-black block"

@@ -4,7 +4,7 @@ import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 import CoffeeLoader from "./CoffeeLoader";
 
 const Office = () => {
-  const office = useGLTF("./models/portfolio-office-v4.glb");
+  const office = useGLTF("./models/portfolio-office-v5.glb");
 
   return (
     <mesh>
