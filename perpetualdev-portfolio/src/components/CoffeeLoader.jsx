@@ -1,4 +1,5 @@
 import { Suspense, useEffect, useState } from "react";
+import { Html } from "@react-three/drei";
 import coffeeLoop from "../assets/img/coffee-loop.gif";
 
 const CoffeeLoader = () => {
