@@ -61,7 +61,7 @@ const getLimitedWeatherStatus = (status) => {
     case "smoke":
     case "haze":
     case "fog":
-      return "rainy";
+      return "raining";
     case "snow":
     case "rain_snow":
     case "rain_sleet":
@@ -70,12 +70,12 @@ const getLimitedWeatherStatus = (status) => {
     case "rain_fzra":
     case "snow_fzra":
     case "sleet":
-      return "snow";
+      return "raining";
     case "tornado":
     case "hurricane":
     case "tropical_storm":
     case "blizzard":
     default:
-      return "catsanddogs";
+      return "raining";
   }
 };

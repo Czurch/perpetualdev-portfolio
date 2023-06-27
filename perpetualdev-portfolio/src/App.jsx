@@ -11,8 +11,8 @@ import * as weather from "./utilities/weather";
 function App() {
   const [tabIndex, setTabIndex] = useState(2);
   const [weatherCondition, setWeatherCondition] = useState({
-    time: "night",
-    weatherStatus: "catsanddogs",
+    time: "day",
+    weatherStatus: "clear",
   });
 
   useEffect(() => {
