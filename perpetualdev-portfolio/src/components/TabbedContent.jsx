@@ -83,7 +83,7 @@ const TabbedContent = ({ onTabChange, weatherCondition, ...props }) => {
             Perpetual Dev.
           </h1>
           <h1 className="bg-secondary text-primary p-2 rounded-full text-xs">
-            In Providence, RI is currently {weatherCondition.weatherStatus}{" "}
+            In Providence, RI it is currently {weatherCondition.weatherStatus}{" "}
             during the {weatherCondition.time}
           </h1>
         </div>
